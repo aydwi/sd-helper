@@ -35,3 +35,8 @@ The behavior of the bot can be configured by editing **data.yml**. Add tasks by 
 3. `time` - Time value(s) at which the message is to be posted. It should be in 24h format, like `HH:MM`.
 
 The name of the task does not matter.
+
+## Notes
+
+1. Do not post same message too frequently. Gitter's spam detection may flag your account.
+2. Register an OAuth 2.0 application at https://developer.gitter.im/apps for highly active bots.

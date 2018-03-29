@@ -21,7 +21,7 @@ securedrop_room_id = '53bb302d107e137846ba5db7'
 target_url = 'https://api.gitter.im/v1/rooms/' + securedrop_room_id + '/chatMessages'
 
 
-# A function with a decorator for handling exceptions that may happen
+# A function which defines a decorator for handling exceptions that may happen
 # during job execution.
 def catch_exceptions(cancel_on_failure=False):
     def decorator(job_func):

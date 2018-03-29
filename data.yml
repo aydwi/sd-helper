@@ -1,0 +1,25 @@
+task1:
+  message: >
+   Good $timezone everyone! Our standup is in 5 minutes at the usual location: https://meet.jit.si/QuickWizardsDanceHigh.
+   
+   Anyone is welcome to participate; just please make sure to click your avatar and set a name so you're not just "Fellow Jitster" to us. Notes are taken live at https://pad.riseup.net/p/SecureDropDailyStandup and will be moved to the GitHub wiki after the meeting.
+  day:
+    - 0
+    - 1
+    - 2
+    - 4
+    - 5
+    - 6
+  time:
+    - "22:25"
+task2:
+  message: >
+   Good $timezone everyone! Our standup is in 5 minutes at the usual location: https://meet.jit.si/QuickWizardsDanceHigh.
+   
+   Anyone is welcome to participate; just please make sure to click your avatar and set a name so you're not just "Fellow Jitster" to us. Notes are taken live at https://pad.riseup.net/p/SecureDropDailyStandup and will be moved to the GitHub wiki after the meeting.
+
+   Today after the standup we are transitioning into an extended meeting (up to a total meeting duration of 30 minutes), during which we can review recent PRs, recently opened issues, and go over other discussion items.
+  day:
+    - 3
+  time:
+    - "22:25"

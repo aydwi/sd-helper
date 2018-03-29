@@ -21,7 +21,7 @@ securedrop_room_id = '53bb302d107e137846ba5db7'
 target_url = 'https://api.gitter.im/v1/rooms/' + securedrop_room_id + '/chatMessages'
 
 
-# A function which returns a decorator function for handling exceptions that happen
+# A function with a decorator for handling exceptions that may happen
 # during job execution.
 def catch_exceptions(cancel_on_failure=False):
     def decorator(job_func):
@@ -74,7 +74,7 @@ def get_data():
     return list_of_tasks
 
 
-# The job of the bot, making a POST request with the headers and data
+# The job of the bot, making a POST request with the headers and data.
 @catch_exceptions(cancel_on_failure=True)
 def job(msg):
 
@@ -110,7 +110,7 @@ def job(msg):
 
 def main():
 
-    # Make a list of all days. Week starts from Monday, at index 0 of the list
+    # Make a list of all days. Week starts from Monday, at index 0 of the list.
     all_days = list(calendar.day_name)
 
     list_of_tasks = get_data()

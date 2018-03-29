@@ -21,4 +21,14 @@ A bot to automatically post useful information on the SecureDrop Gitter room. Me
 
 `apitoken: <gitter-api-token>`
 
-4. Run `python3 main.py` to start the bot.
+4. Run `python3 sd-helper.py` to start the bot.
+
+## Configuring the bot's behavior
+
+The behavior of the bot can be configured by editing **data.yml**. Add tasks by specifying 3 things-
+
+1. `message` - The message that needs to be posted. 
+2. `day` - Integer value(s) denoting day(s) of a week. The week starts from Monday(0) and goes till Sunday(6).
+3. `time` - Time value(s) at which the message is to be posted. It should be in 24h format, like `HH:MM`.
+
+The name of the task does not matter.

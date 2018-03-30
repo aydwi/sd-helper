@@ -38,13 +38,11 @@ def catch_exceptions(cancel_on_failure=False):
 
 # Read the API Token from external file.
 def get_api_token():
-
     with open("auth.yml", 'r') as auth_ymlfile:
         try:
             c = yaml.load(auth_ymlfile)
         except yaml.YAMLError as exc_a:
             print(exc_a)
-    
     api_token = c['apitoken']
     return api_token
 
@@ -53,10 +51,8 @@ def get_api_token():
 # from 'data.yml'. Returns a list of all tasks (a task is a particular
 # message to be posted), in which each task itself is a list of 3 items.
 def get_data():
-
     task = []
     list_of_tasks = []
-
     with open("data.yml", 'r') as data_ymlfile:
         try:
             cfg = yaml.load(data_ymlfile)
@@ -70,25 +66,22 @@ def get_data():
         new_task = list(task)
         list_of_tasks.append(new_task)
         task.clear()
-    
     return list_of_tasks
 
 
 # The job of the bot, making a POST request with the headers and data.
 @catch_exceptions(cancel_on_failure=True)
 def job(msg):
-
     api_token = get_api_token()
     headers = {'Content-Type': 'application/json',
            'Accept': 'application/json',
            'Authorization': 'Bearer {0}'.format(api_token)}
     data = {'text': msg}
-
     print('On {0} at {1}:{2}'.format(datetime.datetime.now().date(),
                                 str(datetime.datetime.now().time().hour).zfill(2),
                                 str(datetime.datetime.now().time().minute).zfill(2)))
     response = requests.post(target_url, headers=headers, json=data)
-    
+
     if response.status_code >= 500:
         print('[{0}] Server Error.'.format(response.status_code))
     elif response.status_code == 404:
@@ -109,7 +102,6 @@ def job(msg):
 
 
 def main():
-
     # Make a list of all days. Week starts from Monday, at index 0 of the list.
     all_days = list(calendar.day_name)
 

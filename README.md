@@ -38,5 +38,6 @@ The name of the task does not matter.
 
 ## Notes
 
-1. Do not post same message too frequently. Gitter's spam detection may flag your account.
-2. Register an OAuth 2.0 application at https://developer.gitter.im/apps for highly active bots.
+1. Make sure the Gihub account has joined the room before posting.
+2. Do not post same message too frequently. Gitter's spam detection may flag your account.
+3. Register an OAuth 2.0 application at https://developer.gitter.im/apps for highly active bots.

@@ -22,7 +22,7 @@ A bot to automatically post useful information on the SecureDrop Gitter room. Me
 
 3. Create a file **auth.yml** with its contents as
 
-`apitoken: <gitter-api-token>`
+   `apitoken: <your-gitter-api-token>`
 
 4. Run `python3 sd-helper.py` to start the bot.
 

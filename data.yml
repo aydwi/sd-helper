@@ -1,6 +1,6 @@
 task1:
   message: >
-   Good $timezone everyone! Our standup is in 5 minutes at the usual location: https://meet.jit.si/QuickWizardsDanceHigh.
+   Good 'timezone' everyone! Our standup is [in 5 minutes](https://www.timeanddate.com/worldclock/fixedtime.html?msg=SecureDrop+Daily+Standup&year=&month=&day=&hour=10&min=00&sec=00&p1=224&am=15) at the usual location: https://meet.jit.si/QuickWizardsDanceHigh.
    
    Anyone is welcome to participate; just please make sure to click your avatar and set a name so you're not just "Fellow Jitster" to us. Notes are taken live at https://pad.riseup.net/p/SecureDropDailyStandup and will be moved to the GitHub wiki after the meeting.
   day:
@@ -12,7 +12,7 @@ task1:
     - "22:25"
 task2:
   message: >
-   Good $timezone everyone! Our standup is in 5 minutes at the usual location: https://meet.jit.si/QuickWizardsDanceHigh.
+   Good 'timezone' everyone! Our standup is [in 5 minutes](https://www.timeanddate.com/worldclock/fixedtime.html?msg=SecureDrop+Daily+Standup&year=&month=&day=&hour=10&min=00&sec=00&p1=224&am=15) at the usual location: https://meet.jit.si/QuickWizardsDanceHigh.
    
    Anyone is welcome to participate; just please make sure to click your avatar and set a name so you're not just "Fellow Jitster" to us. Notes are taken live at https://pad.riseup.net/p/SecureDropDailyStandup and will be moved to the GitHub wiki after the meeting.
 

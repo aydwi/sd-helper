@@ -34,7 +34,7 @@ The behavior of the bot can be configured by editing **data.yml**. Add tasks by 
 2. `day` - Integer value(s) denoting day(s) of a week. The week starts from Monday(0) and goes till Sunday(6).
 3. `time` - Time value(s) at which the message is to be posted, according to your timezone. It should be in 24h format, like `HH:MM`.
 
-The name of the task does not matter.
+The name of a task does not matter, but it should be unique.
 
 ## Notes
 

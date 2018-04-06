@@ -120,7 +120,7 @@ def send_reply(msg):
     try:
         response = requests.post(reply_url, headers=headers, json=data)
     except requests.exceptions.RequestException as exc_rep:
-        print("An exception occured while posting a reply to DM.")
+        print("An exception occured while posting a reply.")
         print(exc_rep)
 
 

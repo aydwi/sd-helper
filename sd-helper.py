@@ -20,7 +20,7 @@ from dateutil.parser import parse
 from multiprocessing import Pool
 
 # Room id of "https://gitter.im/freedomofpress/securedrop".
-sd_room_id = '5abbc3f5d73408ce4f93835a'
+sd_room_id = '53bb302d107e137846ba5db7'
 
 target_url = 'https://api.gitter.im/v1/rooms/' + sd_room_id + '/chatMessages'
 stream_url = 'https://stream.gitter.im/v1/rooms/' + sd_room_id + '/chatMessages'

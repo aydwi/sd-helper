@@ -2,8 +2,9 @@
 
 # A Gitter bot to automatically post message(s) on the SecureDrop room. It can post
 # message(s) on any day of the week, at any specified time value(s). Authorized users
-# can stop the bot from posting by sending a DM. The behaviour of the bot can be
-# configured in 'data.yml'. It can be used in any other Gitter room as well.
+# can stop the bot from posting on certain day(s) by mentioning it followed by a valid
+# command. The behaviour of the bot can be configured in 'data.yml'. It can be used in
+# any other Gitter room as well.
 
 import calendar
 import datetime

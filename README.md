@@ -2,7 +2,7 @@
 
 [![Last commit](https://img.shields.io/github/last-commit/aydwi/sd-helper.svg)]()
 
-A bot to automatically post useful information on the SecureDrop Gitter room. Messages can be scheduled to be posted on specific day(s) of the week at specific time(s). It can be used in any other Gitter room as well.
+A bot to automatically post information on the SecureDrop Gitter room. Messages can be scheduled to be posted on specific day(s) of the week at specific time(s). It can be used in any other Gitter room as well.
 
 ## Requirements
 
@@ -34,7 +34,7 @@ The behavior of the bot can be configured by editing **data.yml**. Add tasks by 
 2. `day` - Integer value(s) denoting day(s) of a week. The week starts from Monday(0) and goes till Sunday(6).
 3. `time` - Time value(s) at which the message is to be posted, according to your timezone. It should be in 24h format, like `HH:MM`.
 
-The name of a task does not matter, but it should be unique.
+The name of a task does not matter other than the fact that it should be unique.
 
 ## Interacting with the bot
 
@@ -46,7 +46,7 @@ or
 
 `@sd-helper blacklist:YYYY/MM/DD`
 
-Note that bot only responds to users authorized to perform this action. A list of such users is maintained in the file **approved_users.yml**. Users are identified by their Gitter IDs, which can be obtained by following the [Gitter API documentation](https://developer.gitter.im/docs/welcome).
+Note that the bot only responds to users authorized to perform this action. A list of such users is maintained in the file **approved_users.yml**. Users are identified by their Gitter user IDs, which can be obtained by following the [Gitter API documentation](https://developer.gitter.im/docs/welcome).
 
 ## Notes
 

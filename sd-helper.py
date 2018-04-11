@@ -211,7 +211,6 @@ def job(msg):
     elif response.status_code == 200:
         print('[{0}] The request succeeded.\n'.format(response.status_code))
         print('Posted the following message: \n{0}\n'.format(msg))
-        print('Received the following response: \n{0}\n\n\n'.format(response.json()))
     else:
         print('Unexpected Error: [HTTP {0}]: Content: {1}'.format(response.status_code,
                                                                   response.content))

@@ -27,6 +27,11 @@ target_url = 'https://api.gitter.im/v1/rooms/' + sd_room_id + '/chatMessages'
 stream_url = 'https://stream.gitter.im/v1/rooms/' + sd_room_id + '/chatMessages'
 reply_url = target_url
 
+# Status badges that are displayed at the top of every reply posted against a user query.
+alert_badge = '[![Alert](https://img.shields.io/badge/Info-Alert-orange.svg?style=flat-square)]()'
+success_badge = '[![Success](https://img.shields.io/badge/Info-Success-brightgreen.svg?style=flat-square)]()'
+failed_badge = '[![Failed](https://img.shields.io/badge/Info-Failed-red.svg?style=flat-square)]()'
+help_badge = '[![Help](https://img.shields.io/badge/Info-Help-blue.svg?style=flat-square)]()'
 
 # A function which defines a decorator for handling exceptions that may happen
 # during job (which is posting scheduled messages) execution.
@@ -124,6 +129,52 @@ def send_reply(msg):
         print(exc_rep)
 
 
+# Handle the 'blacklist' command.
+def blacklist_cmd(message_info, from_user, from_user_id):
+    approved_users = get_approved_users()
+    if from_user_id in approved_users:
+        message_info = message_info[10:]
+        try:
+            new_date = str(parse(message_info).date())
+            # Don't accept past dates. What's the point in blacklisting them?
+            if parse(message_info).date() < datetime.datetime.now().date():
+                send_reply("{0}\nI'm afraid that date has already passed."
+                            " Can't really do much about it.".format(alert_badge))
+            else:
+                # Don't accept same date to be blacklisted again.
+                already_bl_dates = get_blacklist()
+                if new_date in already_bl_dates:
+                    send_reply("{0}\nThe date {1} is already blacklisted. Doing"
+                                " it again will only make it feel worse."
+                                .format(alert_badge, new_date))
+                else:
+                    with open('blacklist.yml', 'a') as f:
+                        f.write("- '" + new_date + "'" + '\n')
+                    send_reply("{0}\nNo further messages will be posted on {1}."
+                                " This action was initiated by **{2}**."
+                                .format(success_badge, new_date, from_user))
+        except ValueError:
+            send_reply("{0}\nSomething was wrong with the specified date."
+                            " Try again maybe.".format(failed_badge))
+
+
+# Handle the 'help' command.
+def help_cmd():
+    send_reply("{0}\nHello! I'm a bot for automatically posting messages"
+               " on this Gitter channel. You can schedule messages(s) to be posted on"
+               " specific day(s) of the week at specific time(s), and then forget about"
+               " it. This information can be specified"
+               " [here](https://github.com/aydwi/sd-helper/blob/master/data.yml).\n\n"
+               " Further, you can interact with me via an '@' mention followed by a"
+               " command. The following commands are currently supported-\n\n`help`"
+               " - Show this message.\n`blacklist:YYYY/MM/DD` - Blacklist a date."
+               " No further messages will be posted on that date once this command"
+               " is received by an approved user. A list of approved users can be found"
+               " [here](https://github.com/aydwi/sd-helper/blob/master/approved_users.yml)."
+               "\n\nSource: https://github.com/aydwi/sd-helper\n\nFor any additional help"
+               " or queries, please message @aydwi.".format(help_badge))
+
+
 # Use the streaming API to listen to messages in the SecureDrop room, and
 # write a date to 'blacklist.yml' if correct format of blacklisting dates is
 # encountered. Otherwise post an informative (and sometimes slightly humorous)
@@ -151,35 +202,13 @@ def stream_sd():
                 message_info = dm_data['text']
                 from_user = dm_data['fromUser']['displayName']
                 from_user_id = dm_data['fromUser']['id']
-                approved_users = get_approved_users()
 
-                if message_info.startswith('@sd-helper') and from_user_id in approved_users:
+                if message_info.startswith('@sd-helper'):
                     message_info = message_info[11:]
                     if message_info.startswith('blacklist:'):
-                        message_info = message_info[10:]
-                        try:
-                            new_date = str(parse(message_info).date())
-                            # Don't accept past dates. What's the point in blacklisting them.
-                            if parse(message_info).date() < datetime.datetime.now().date():
-                                send_reply(":heavy_exclamation_mark: I'm afraid that date has"
-                                           " already passed. Can't really do much about it!")
-                            else:
-                                # Don't accept same date to be blacklisted again.
-                                already_bl_dates = get_blacklist()
-                                if new_date in already_bl_dates:
-                                    send_reply(":heavy_exclamation_mark: The date {0} is already"
-                                               " blacklisted. Doing it again will only make it"
-                                               " feel worse.".format(new_date))
-                                else:
-                                    with open('blacklist.yml', 'a') as f:
-                                        f.write("- '" + new_date + "'" + '\n')
-                                    send_reply(":white_check_mark: **Success**! No further"
-                                               " messages will be posted on {0}. This action was"
-                                               " initiated by **{1}**.".format(new_date, from_user))
-                        except ValueError:
-                            send_reply(":x: Something was wrong with the specified date."
-                                       " Try again maybe.")
-
+                        blacklist_cmd(message_info, from_user, from_user_id)
+                    elif message_info.lower() == 'help':
+                        help_cmd()
     else:
         print('An error occured while using the streaming API.'
             ' Status code [{0}]'.format(stream_response.status_code))
@@ -234,8 +263,7 @@ def main_job():
 
 
 def main():
-    pool = Pool(processes=2)
-    
+    pool = Pool(processes=2) 
     pool.apply_async(main_job)
     pool.apply_async(stream_sd)
     pool.close()

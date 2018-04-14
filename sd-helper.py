@@ -115,7 +115,7 @@ def get_data():
     return list_of_tasks
 
 
-# Send a reply to messages/commands received by authorized users
+# Send a reply to messages/commands received from users
 def send_reply(msg):
     api_token = get_api_token()
     headers = {'Content-Type': 'application/json',

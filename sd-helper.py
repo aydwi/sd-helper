@@ -169,7 +169,7 @@ def help_cmd():
                " command. The following commands are currently supported-\n\n`help`"
                " - Show this message.\n`blacklist:YYYY/MM/DD` - Blacklist a date."
                " No further messages will be posted on that date once this command"
-               " is received by an approved user. A list of approved users can be found"
+               " is received from an approved user. A list of approved users can be found"
                " [here](https://github.com/aydwi/sd-helper/blob/master/approved_users.yml)."
                "\n\nSource: https://github.com/aydwi/sd-helper\n\nFor any additional help"
                " or queries, please message @aydwi.".format(help_badge))

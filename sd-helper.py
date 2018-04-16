@@ -184,9 +184,7 @@ def help_cmd():
 
 
 # Use the streaming API to listen to messages in the SecureDrop room, and
-# write a date to 'blacklist.yml' if correct format of blacklisting dates is
-# encountered. Otherwise post an informative (and sometimes slightly humorous)
-# message.
+# act on valid commands.
 def stream_sd():
     api_token = get_api_token()
     headers = {'Accept': 'application/json',

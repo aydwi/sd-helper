@@ -24,8 +24,6 @@ task2:
 task3:
   message: >
    Good 'timezone' everyone! Our weekly UX meeting is in 5 minutes at the usual location: https://meet.jit.si/QuickWizardsDanceHigh.
-
-   The possible topics of discussion can be wireframing/prototyping high confidence stories for workstation, collaboration opportunities via OTF, reviewing findings from previous interviews & trainings etc.
   day:
     - 0
   time:

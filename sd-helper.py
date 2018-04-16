@@ -27,11 +27,19 @@ target_url = 'https://api.gitter.im/v1/rooms/' + sd_room_id + '/chatMessages'
 stream_url = 'https://stream.gitter.im/v1/rooms/' + sd_room_id + '/chatMessages'
 reply_url = target_url
 
-# Status badges that are displayed at the top of every reply posted against a user query.
-alert_badge = '[![Alert](https://img.shields.io/badge/Info-Alert-orange.svg?style=flat-square)]()'
-success_badge = '[![Success](https://img.shields.io/badge/Info-Success-brightgreen.svg?style=flat-square)]()'
-failed_badge = '[![Failed](https://img.shields.io/badge/Info-Failed-red.svg?style=flat-square)]()'
-help_badge = '[![Help](https://img.shields.io/badge/Info-Help-blue.svg?style=flat-square)]()'
+# Status badges that are displayed at the top of messages and replies posted
+# against user queries.
+alert_badge = ("[![Alert](https://img.shields.io/badge/-Alert-orange.svg?"
+              "style=flat-square&logo=gitter-white&logoWidth=8)]()")
+success_badge = ("[![Success](https://img.shields.io/badge/-Success-brightgreen.svg?"
+                "style=flat-square&logo=gitter-white&logoWidth=8)]()")
+failed_badge = ("[![Failed](https://img.shields.io/badge/-Failed-red.svg?"
+               "style=flat-square&logo=gitter-white&logoWidth=8)]()")
+help_badge = ("[![Help](https://img.shields.io/badge/-Help-blue.svg?"
+             "style=flat-square&logo=gitter-white&logoWidth=8)]()")
+rem_badge = ("[![Reminder](https://img.shields.io/badge/-Reminder-lightgrey.svg?"
+            "style=flat-square&logo=gitter-white&logoWidth=8)]()")
+
 
 # A function which defines a decorator for handling exceptions that may happen
 # during job (which is posting scheduled messages) execution.
@@ -225,6 +233,7 @@ def job(msg):
     print('On {0} at {1}:{2}'.format(datetime.datetime.now().date(),
                                 str(datetime.datetime.now().time().hour).zfill(2),
                                 str(datetime.datetime.now().time().minute).zfill(2)))
+    send_reply(rem_badge + '\n')
     response = requests.post(target_url, headers=headers, json=data)
 
     if response.status_code >= 500:

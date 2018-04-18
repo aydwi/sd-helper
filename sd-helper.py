@@ -41,8 +41,7 @@ rem_badge = ("[![Reminder](https://img.shields.io/badge/-Reminder-lightgrey.svg?
             "style=flat-square&logo=gitter-white&logoWidth=8)]()")
 
 
-# A function which defines a decorator for handling exceptions that may happen
-# during job (which is posting scheduled messages) execution.
+# Handle exceptions that may happen during job execution.
 def catch_exceptions(cancel_on_failure=False):
     def decorator(job_func):
         @functools.wraps(job_func)

@@ -19,6 +19,7 @@ import yaml
 
 from dateutil.parser import parse
 from multiprocessing import Pool
+from datetime import datetime as dt
 
 # Room id of "https://gitter.im/freedomofpress/securedrop".
 sd_room_id = '53bb302d107e137846ba5db7'
@@ -41,7 +42,7 @@ rem_badge = ("[![Reminder](https://img.shields.io/badge/-Reminder-lightgrey.svg?
             "style=flat-square&logo=gitter-white&logoWidth=8)]()")
 
 
-# Guard against exceptions thrown during job execution.
+# Guard against exceptions thrown during during job execution.
 def catch_exceptions(cancel_on_failure=False):
     def decorator(job_func):
         @functools.wraps(job_func)
@@ -144,7 +145,7 @@ def blacklist_cmd(message_info, from_user, from_user_id):
         try:
             new_date = str(parse(message_info).date())
             # Don't accept past dates. What's the point in blacklisting them?
-            if parse(message_info).date() < datetime.datetime.now().date():
+            if parse(message_info).date() < dt.now().date():
                 send_reply("{0}\nI'm afraid that date has already passed."
                             " Can't really do much about it.".format(alert_badge))
             else:
@@ -227,9 +228,9 @@ def job(msg):
            'Accept': 'application/json',
            'Authorization': 'Bearer {0}'.format(api_token)}
     data = {'text': msg}
-    print('On {0} at {1}:{2}'.format(datetime.datetime.now().date(),
-                                str(datetime.datetime.now().time().hour).zfill(2),
-                                str(datetime.datetime.now().time().minute).zfill(2)))
+    print('On {0} at {1}:{2}'.format(dt.now().date(),
+                                str(dt.now().time().hour).zfill(2),
+                                str(dt.now().time().minute).zfill(2)))
     send_reply(rem_badge + '\n')
     response = requests.post(target_url, headers=headers, json=data)
 
@@ -251,7 +252,7 @@ def job(msg):
                                                                   response.content))
 
 
-def main_job():
+def schedule_job():
     all_days = list(calendar.day_name)
     list_of_tasks = get_data()
     
@@ -261,10 +262,19 @@ def main_job():
                 getattr(schedule.every(),
                         str(all_days[day_of_week]).lower()).at(this_time).do(job, msg = task[0])
 
+
+def main_job():
+    temp = 1
+    schedule_job()
     while True:
         current_blacklist = get_blacklist()
-        if str(datetime.datetime.now().date()) not in current_blacklist:
-            schedule.run_pending()
+        if str(dt.now().date()) in current_blacklist:
+            schedule.clear()
+            temp = 0
+        if dt.now().hour == dt.now().minute == temp == 0:
+            schedule_job()
+            temp += 1
+        schedule.run_pending()
         time.sleep(5)
 
 

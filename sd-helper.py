@@ -42,7 +42,7 @@ rem_badge = ("[![Reminder](https://img.shields.io/badge/-Reminder-lightgrey.svg?
             "style=flat-square&logo=gitter-white&logoWidth=8)]()")
 
 
-# Guard against exceptions thrown during during job execution.
+# Guard against exceptions thrown during job execution.
 def catch_exceptions(cancel_on_failure=False):
     def decorator(job_func):
         @functools.wraps(job_func)
@@ -252,6 +252,7 @@ def job(msg):
                                                                   response.content))
 
 
+# Schedule the job to be run.
 def schedule_job():
     all_days = list(calendar.day_name)
     list_of_tasks = get_data()
@@ -263,14 +264,20 @@ def schedule_job():
                         str(all_days[day_of_week]).lower()).at(this_time).do(job, msg = task[0])
 
 
-def main_job():
+# Run the scheduled job.
+def run_scheduler():
     temp = 1
-    schedule_job()
+    schedule_job()  # Schedule once at the beginning
     while True:
         current_blacklist = get_blacklist()
         if str(dt.now().date()) in current_blacklist:
+            # If current date is found as backlisted
+            # then delete the scheduled job to prevent
+            # it from running again.
             schedule.clear()
             temp = 0
+        # If the scheduled job was deleted earlier, it
+        # is rescheduled on the next day at 0000 hrs.
         if dt.now().hour == dt.now().minute == temp == 0:
             schedule_job()
             temp += 1
@@ -280,7 +287,7 @@ def main_job():
 
 def main():
     pool = Pool(processes=2) 
-    pool.apply_async(main_job)
+    pool.apply_async(run_scheduler)
     pool.apply_async(stream_sd)
     pool.close()
     pool.join()

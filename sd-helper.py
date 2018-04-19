@@ -260,8 +260,10 @@ def schedule_job():
     for task in list_of_tasks:
         for day_of_week in task[1]:
             for this_time in task[2]:
-                getattr(schedule.every(),
-                        str(all_days[day_of_week]).lower()).at(this_time).do(job, msg = task[0])
+                (getattr(schedule.every(),
+                         str(all_days[day_of_week]).lower())
+                         .at(this_time)
+                         .do(job, msg = task[0]))
 
 
 # Run the scheduled job.

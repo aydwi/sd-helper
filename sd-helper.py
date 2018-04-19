@@ -41,7 +41,7 @@ rem_badge = ("[![Reminder](https://img.shields.io/badge/-Reminder-lightgrey.svg?
             "style=flat-square&logo=gitter-white&logoWidth=8)]()")
 
 
-# Handle exceptions that may happen during job execution.
+# Guard against exceptions thrown during job execution.
 def catch_exceptions(cancel_on_failure=False):
     def decorator(job_func):
         @functools.wraps(job_func)

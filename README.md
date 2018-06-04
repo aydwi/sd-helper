@@ -1,7 +1,5 @@
 # sd-helper
 
-[![Last commit](https://img.shields.io/github/last-commit/aydwi/sd-helper.svg)]()
-
 A bot to automatically post information on the SecureDrop Gitter room. Messages can be scheduled to be posted on specific day(s) of the week at specific time(s). It can be used in any other Gitter room as well.
 
 ## Requirements

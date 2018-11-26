@@ -6,11 +6,11 @@ A bot to automatically post information on the SecureDrop Gitter room. Messages 
 
 1. Python [Requests](http://docs.python-requests.org/en/master/)
 
-    `pip3 install requests`
+    `pip install requests`
 
 2. Python [schedule](https://schedule.readthedocs.io/en/stable/)
 
-    `pip3 install schedule`
+    `pip install schedule`
     
 ## Usage
 
@@ -22,7 +22,7 @@ A bot to automatically post information on the SecureDrop Gitter room. Messages 
 
    `apitoken: <your-gitter-api-token>`
 
-4. Run `python3 sd-helper.py` to start the bot.
+4. Execute the script *sd-helper.py* to start the bot.
 
 ## Configuring the bot's behavior
 
@@ -51,7 +51,3 @@ Note that the bot only responds to users authorized to perform this action. A li
 1. Make sure the GitHub account has joined the room before posting.
 2. Do not post same message too frequently. Gitter's spam detection may flag your account.
 3. Register an OAuth 2.0 application at https://developer.gitter.im/apps for highly active bots.
-
-## To-do
-
-- [ ] Use locks when accessing **blacklist.yml**.
